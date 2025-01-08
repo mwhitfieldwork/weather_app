@@ -1,1 +1,29 @@
 <p>tasks works!</p>
+
+
+<div>
+    <button (click)="addTask()">Add Task</button>
+</div>
+
+<form [formGroup]="taskForm" *ngIf="isTaskAdded">
+    <div>
+        <label for="taskname">Task Name</label>
+        <input type="text" formControlName="taskname">
+    </div>
+
+    <div>
+        <label for="completed">Completed</label>
+        <input type="checkbox" formControlName="completed">
+    </div>    
+    <button type="button" (click)="CreateTask(taskForm)">Create Task</button>
+</form>
+
+<div class="tasks-container">
+     <div>
+        <ul>
+            <li *ngFor="let task of tasks"></li>
+        </ul>
+
+        <p *ngIf="tasks.length === 0">No tasks found</p>
+    </div>
+</div>

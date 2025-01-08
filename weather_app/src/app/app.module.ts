@@ -6,20 +6,29 @@ import { AppComponent } from './app.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { TasksComponent } from './tasks/tasks.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TasksService } from './tasks/tasks.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 const routes: Routes = [
   { path: '', component: TasksComponent },
 ];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,  
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    ReactiveFormsModule ,
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [TasksService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
