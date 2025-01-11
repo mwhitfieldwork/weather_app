@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit{
       completed: taskForm.value.completed
     }
 
-    this.tasks.push(task);
+    //this.tasks.push(task);
     this.taskForm.reset();
     this.isTaskAdded = false
 
@@ -55,5 +55,19 @@ export class TasksComponent implements OnInit{
       }
     );
 
+  }
+
+
+  UpdateTask(task: Task){
+
+    var taskUpdate = {...task, 
+      "taskId": task.id,
+      "taskname": task.taskname,
+      "completed": task.completed
+    }
+  
+    this.tasksService.updateTask(taskUpdate, task.id.toString()).subscribe(task => {
+      console.log(task);
+    })
   }
 }
