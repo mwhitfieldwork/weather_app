@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../_models/task.model';
 import { TasksService } from './tasks.service';
-import { Observable } from 'rxjs';
+import { DestroyRef } from '@angular/core';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -15,7 +15,8 @@ export class TasksComponent implements OnInit{
   isTaskAdded: boolean = false
   tasks: Task[] = [];
 
-  constructor(private fb:FormBuilder, private tasksService: TasksService){
+  constructor(private fb:FormBuilder, private tasksService: TasksService,
+    private destroyRef: DestroyRef){
 
   }
 
@@ -24,11 +25,13 @@ export class TasksComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.tasksService.getTasks().subscribe(
+   const subscription =  this.tasksService.getTasks().subscribe(
       (response) => {
         this.tasks = response
       }
     );
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
 
     this.taskForm = this.fb.group({
       taskname: ['', Validators.required],

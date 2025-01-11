@@ -1,33 +1,36 @@
-<p>tasks works!</p>
 
-
+<section class="container">
+<h1>Task Builder</h1>
 <div>
-    <button (click)="addTask()">Add Task</button>
+    <button (click)="addTask()" class="btn btn-primary">Add Task</button>
 </div>
 
-<form [formGroup]="taskForm" *ngIf="isTaskAdded">
-    <div>
+<form [formGroup]="taskForm" *ngIf="isTaskAdded" id="task-form">
+    <div class="form-control-container">
         <label for="taskname">Task Name</label>
-        <input type="text" formControlName="taskname">
+        <input type="text" formControlName="taskname" id="taskname" class="form-control">
     </div>
 
-    <div>
+    <div class="form-control-container">
         <label for="completed">Completed</label>
         <input type="checkbox" formControlName="completed">
     </div>    
-    <button type="button" (click)="CreateTask(taskForm)">Create Task</button>
+    <button type="button" (click)="CreateTask(taskForm)" class="btn btn-secondary">Create Task</button>
 </form>
+</section>
 
+<section class="container">
 <div class="tasks-container">
      <div>
         <ul>
             <li *ngFor="let task of tasks">
                 {{task.taskname}}
                 {{task.completed}}
-                <button type="button" (click)="UpdateTask(task)">Edit Task</button>
+                <button type="button" (click)="UpdateTask(task)" class="btn btn-primary">Edit Task</button>
             </li>
         </ul>
 
         <p *ngIf="tasks.length === 0">No tasks found</p>
     </div>
 </div>
+</section>
