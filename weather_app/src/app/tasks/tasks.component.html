@@ -21,7 +21,11 @@
 <div class="tasks-container">
      <div>
         <ul>
-            <li *ngFor="let task of tasks"></li>
+            <li *ngFor="let task of tasks">
+                {{task.taskname}}
+                {{task.completed}}
+                <button type="button" (click)="UpdateTask(task)">Edit Task</button>
+            </li>
         </ul>
 
         <p *ngIf="tasks.length === 0">No tasks found</p>
